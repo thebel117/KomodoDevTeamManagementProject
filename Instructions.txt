@@ -1,0 +1,72 @@
+Your client Komodo Insurance has a number of software development teams and needs you to write a Console App to help their Product Managers manage them all.
+
+You will need to create at least four different classes:
+- Two POCOS: Developer, DevTeam
+- Two Repositories: DeveloperRepo, DevTeamRepo
+
+Info from Instructors:
+You will need to give the POCOs properties and  Repos need Create,Read,Update,Delete operations methods as appropriate. You will then create a User Interface
+(Console Application) to build the functionality Komodo Insurance requires utilizing these classes. We have provided you with a few fields in the appropriate 
+classes to help you in writing the CRUD Methods for the Developer and DevTeam POCOs.
+
+You need to adhere to the guidelines from Komodo Insurance while writing their application to meet their needs in managing the DevTeams and Developers. Clients 
+will typically not give you all the info you need, so you may need to use your brain and peers to fill in the blanks!
+
+Info from Komodo Insurance:
+Developers have names and ID numbers; we need to be able to identify one developer without mistaking them for another. We also need to know whether or not they 
+have access to the online learning tool: Pluralsight.
+
+Teams need to contain their Team members (Developers) and their Team Name, and Team ID.
+
+Our managers need to be able to add and remove members to/from a team by their unique identifier. They should be able to see a list of existing developers to 
+choose from and add to existing teams. Odds are, the manager will create a team, and then add Developers individually from the Developer Directory to that team.
+
+Challenge: Our HR Department uses the software monthly to get a list of all our Developers that need a Pluralsight license. Create this functionality in the 
+Console Application
+
+Challenge: Some of our managers are nitpicky and would like the functionality to add multiple Developers to a team at once, rather than one by one. Integrate this into your application.
+
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+
+Stuff to remember:
+
+You can and should have other files within the project (hell, even other projects in there)
+Should have a: Dev class, Dev TEAM class, dev repo, and dev team repo file (4 in total minimum)
+These repos have all my lists and other things i using to work with and manipulate the items.
+
+new console app holds other projects --> dotnet new console // CA holds all interactions with the user
+creating class lib to hold the stuff --> dotnet new classlib -o Komodo_Developer -n Developer
+
+POCO = Just a normal class, no attributes describing infrastructure concerns or other responsibilities that your domain objects shouldn't have.
+
+CRUD = 
+Create: adding new data to a database or storage system. It's like writing a new entry in a notebook where you jot down information for the first time.
+Read: retrieving existing data from a database or storage system. Like opening the notebook and reading through the entries to find specific information.
+Update: modifying existing data in a database or storage system. Same as editing an entry in a notebook to correct mistakes or update information.
+Delete: removing data from a database or storage system. Like tearing out a page from a notebook to remove an entry permanently.
+
+CRUD always goes in the Repositories
+
+//----------------------------------------------------------------------------------------------------------------------------------------------//
+1. POCO Classes:
+Developer --> Properties: Name, ID, PluralsightAccess.
+DevTeam ---> Properties: TeamName, TeamID.
+
+2. Repositories:
+DeveloperRepo---> CRUD operations for managing developers.
+DevTeamRepo ---> CRUD operations for managing development teams.
+
+
+Files to Populate:
+Komodo_Console:
+Program.cs: Main entry point of the console application.
+ProgramUI.cs: User interface for interacting with the application.
+
+Komodo_Developer:
+Developer.cs: Definition of the Developer class.
+DeveloperRepository.cs: Implementation of the DeveloperRepo repository.
+
+Komodo_DevTeam:
+DevTeam.cs: Definition of the DevTeam class.
+DevTeamRepository.cs: Implementation of the DevTeamRepo repository.
+
