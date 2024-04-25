@@ -9,7 +9,7 @@ namespace Komodo_DevTeam
         public int TeamId { get; set; }
         public List<int> TeamMembers { get; set; } = new List<int>();
 
-        // Constructor with parameters
+        // Constructor with 2 args
         public DevTeam(int teamId, string teamName)
         {
             TeamId = teamId;
