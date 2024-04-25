@@ -9,7 +9,7 @@ namespace Komodo_DevTeam
         private readonly List<DevTeam> _devTeams = new List<DevTeam>(); //  private readonly field holdingg a list of development teams. ("_xxxx" = a private class)
 
         public void AddDevTeam(DevTeam devTeam) // Method to add a dev team to the repo//
-        //!Re: writing variables twice like this is dec'g a variable (devTeam) AND gives it a type (DevTeam)--> "I'm making a box with 'devTeam' sharpie'd on the side, bc it will only hold 'DevTeam' objects"
+        //Re: writing variables twice like this is dec'g a variable (devTeam) AND gives it a type (DevTeam)--> "I'm making a box with 'devTeam' sharpie'd on the side, bc it will only hold 'DevTeam' objects"
         {
             if (devTeam == null) // Checks if the provided devTeam parameter is invalid.
                 throw new ArgumentNullException(nameof(devTeam)); // Throwing an ArgumentNullException if devTeam has invalid value
@@ -21,7 +21,7 @@ namespace Komodo_DevTeam
         {
             DevTeam devTeam = GetDevTeamById(teamId); // Finds the development team by ID.
             if (devTeam != null) // Checking if the dev team exists --> ARE YOU REAL? but in C#
-                _devTeams.Remove(devTeam); // !Removes the team from the list!!!.
+                _devTeams.Remove(devTeam); // Removes the team from the list!!!.
         }
 
         public IEnumerable<DevTeam> GetAllDevTeams() // Method to get all dev teams from the repo

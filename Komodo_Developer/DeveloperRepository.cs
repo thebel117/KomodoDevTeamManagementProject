@@ -27,7 +27,7 @@ namespace Komodo_Developer
         {
             return _developers; // Returns all devs stored in the repo.
         }
-//!Why this one really matters--> It's getting a list of devs; need this to verify who is or isn't in it. IEnumerable = very useful!!!
+//Why this one really matters--> It's getting a list of devs; need this to verify who is or isn't in it. IEnumerable = very useful!!!
         public Developer GetDeveloperById(int developerId) //Grab a dev by ID
         {
             return _developers.FirstOrDefault(dev => dev.DeveloperId == developerId); // Finding & returning the developer with the provided ID. (lambda exp 'dev => dev.DeveloperId == developerId )

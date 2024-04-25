@@ -17,4 +17,3 @@ namespace Komodo_DevTeam
         }
     }
 };
-//Add constructor with 2 args

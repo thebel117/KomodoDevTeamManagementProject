@@ -13,6 +13,16 @@ namespace Komodo_Console
         public void Run()
         {
             Console.WriteLine("Welcome to Komodo's Developer Management System:");
+
+            _developerRepo.AddDeveloper(new Developer(1, "Liz Ardd", true));
+            _developerRepo.AddDeveloper(new Developer(2, "Bier D. Draco", false));
+            _developerRepo.AddDeveloper(new Developer(3, "Sally Amander", true));
+            _developerRepo.AddDeveloper(new Developer(4, "Basil Lisk", false));
+
+            _devTeamRepo.AddDevTeam(new DevTeam(1, "Backend Team"));
+            _devTeamRepo.AddDevTeam(new DevTeam(2, "Frontend Team"));
+            _devTeamRepo.AddDevTeam(new DevTeam(3, "Data Management"));
+
             Menu();
         }
 
@@ -93,46 +103,48 @@ namespace Komodo_Console
             }
         }
 
-        private void ManageDevelopmentTeams()
+private void ManageDevelopmentTeams()
+{
+    bool keepManaging = true;
+
+    while (keepManaging)
+    {
+        Console.WriteLine("Development Team Management Menu:\n" +
+                            "1. Add Development Team\n" +
+                            "2. Remove Development Team\n" +
+                            "3. View All Development Teams\n" +
+                            "4. Update Development Team Members\n" +
+                            "5. Go Back");
+
+        string input = Console.ReadLine();
+
+        switch (input)
         {
-            {
-                bool keepManaging = true;
-
-                while (keepManaging)
-                {
-                    Console.WriteLine("Development Team Management Menu:\n" +
-                                        "1. Add Development Team\n" +
-                                        "2. Remove Development Team\n" +
-                                        "3. View All Development Teams\n" +
-                                        "4. Go Back");
-
-                    string input = Console.ReadLine();
-
-                    switch (input)
-                    {
-                        case "1":
-                            AddDevelopmentTeam();
-                            break;
-                        case "2":
-                            RemoveDevelopmentTeam();
-                            break;
-                        case "3":
-                            ViewAllDevelopmentTeams();
-                            break;
-                        case "4":
-                            keepManaging = false;
-                            break;
-                        default:
-                            Console.WriteLine("Please use a valid input.");
-                            break;
-                    }
-
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
-                }
-            }
+            case "1":
+                AddDevelopmentTeam();
+                break;
+            case "2":
+                RemoveDevelopmentTeam();
+                break;
+            case "3":
+                ViewAllDevelopmentTeams();
+                break;
+            case "4":
+                UpdateDevelopmentTeamMembers();
+                break;
+            case "5":
+                keepManaging = false;
+                break;
+            default:
+                Console.WriteLine("Please use a valid input.");
+                break;
         }
+
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        Console.Clear();
+    }
+}
 
         // Developer management methods
         private void AddDeveloper()
@@ -141,7 +153,7 @@ namespace Komodo_Console
 
             // Get developer details from user input
             Console.WriteLine("Enter new developer's ID:");
-            int developerId = int.Parse(Console.ReadLine());                 //!parse makes int work like an int32
+            int developerId = int.Parse(Console.ReadLine());                 //parse makes int work like an int32
 
             Console.WriteLine("Enter new developer's name:");
             string name = Console.ReadLine();
@@ -213,6 +225,85 @@ namespace Komodo_Console
             Console.WriteLine("Development team removed successfully!");
         }
 
+private void UpdateDevelopmentTeamMembers()
+{
+    Console.WriteLine("What would you like to do?");
+    Console.WriteLine("1. Add Developer to Development Team");
+    Console.WriteLine("2. Remove Developer from Development Team");
+    Console.WriteLine("3. View Development Team Members");
+    Console.WriteLine("4. Go Back");
+
+    string input = Console.ReadLine();
+
+    switch (input)
+    {
+        case "1":
+            AddDeveloperToTeam();
+            break;
+        case "2":
+            RemoveDeveloperFromTeam();
+            break;
+        case "3":
+            ViewDevelopmentTeamMembers();
+            break;
+        case "4":
+            return; // Go back, no need to clear console or press any key
+        default:
+            Console.WriteLine("Please enter a valid option.");
+            break;
+    }
+}
+
+private void AddDeveloperToTeam()
+{
+    Console.WriteLine("Enter the ID of the Development Team:");
+    int teamId = int.Parse(Console.ReadLine());
+
+    Console.WriteLine("Enter the ID of the Developer to add:");
+    int developerId = int.Parse(Console.ReadLine());
+
+    _devTeamRepo.AddDeveloperToTeam(teamId, developerId);
+
+    Console.WriteLine("Developer added to the Development Team successfully!");
+}
+
+private void RemoveDeveloperFromTeam()
+{
+    Console.WriteLine("Enter the ID of the Development Team:");
+    int teamId = int.Parse(Console.ReadLine());
+
+    Console.WriteLine("Enter the ID of the Developer to remove:");
+    int developerId = int.Parse(Console.ReadLine());
+
+    _devTeamRepo.RemoveDeveloperFromTeam(teamId, developerId);
+
+    Console.WriteLine("Developer removed from the Development Team successfully!");
+}
+
+private void ViewDevelopmentTeamMembers()
+{
+    Console.WriteLine("Enter the ID of the Development Team:");
+    int teamId = int.Parse(Console.ReadLine());
+
+    DevTeam devTeam = _devTeamRepo.GetDevTeamById(teamId);
+    if (devTeam != null)
+    {
+        Console.WriteLine($"Developers in Team '{devTeam.TeamName}':");
+
+        foreach (int developerId in devTeam.TeamMembers)
+        {
+            Developer developer = _developerRepo.GetDeveloperById(developerId);
+            if (developer != null)
+            {
+                Console.WriteLine($"ID: {developer.DeveloperId}, Name: {developer.Name}");
+            }
+        }
+    }
+    else
+    {
+        Console.WriteLine($"No team found with ID: {teamId}");
+    }
+}
         private void ViewAllDevelopmentTeams()
         {
             Console.WriteLine("List of all current Komodo development teams:");
@@ -228,6 +319,4 @@ namespace Komodo_Console
     }
 };
 
-        //Need UI for: Adding Dev, Removing Dev, Viewing Dev, 
-        //!Include seed data
-        //Fix using errors--> what's wrong with namespaces???
+        //!Include seed data of devs and devteams

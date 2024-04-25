@@ -19,4 +19,3 @@ namespace Komodo_Developer
     }
 };
 
-//Add constructor that takes three args
